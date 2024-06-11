@@ -10,3 +10,8 @@ You are tasked with analyzing the situation and determining which network protoc
 My goals are to:
 - Provide a summary of the problem found in the tcpdump log
 - Explain your analysis of the data and provide one possible cause of the incident
+
+Response:
+| Part 1: Provide a summary of the problem found in the DNS and ICMP traffic log. |
+| ------------------------------------------------------------------------------- |
+| In this case, the UDP protocol was used to contact the DNS server to correctly retrieve the IP address for the domain name of “yummyrecipesforme.com.” Then the ICMP protocol responded with an error message indicating a problem with contacting the DNS server. The first two lines illustrate the communication between the source computer and the DNS server destination. The next lines display the error that is occurring in the communication, in this case, “udp port 53 unreachable.” We know that port 53 is associated with DNS protocol traffic meaning there is a problem with the DNS server. After reading more of the message we see more evidence of this because of the plus sign after the query identification number 35084 which indicates flags with the UDP message and the “A?” symbol which indicates flags with performing DNS protocol operations. With the ICMP response error message about port 53, it is more than likely that the DNS server isn’t responding. We can confirm this by looking at the rest of the messages containing the flags commonly associated with the outgoing UDP message and domain name retrieval.|
